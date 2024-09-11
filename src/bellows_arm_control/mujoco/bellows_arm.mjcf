@@ -1,0 +1,319 @@
+<mujoco model="bellows_arm">
+  <compiler angle="degree"/>
+  <option timestep="0.001" cone="elliptic" jacobian="sparse" solver="Newton" iterations="50" tolerance="1e-10">
+    <flag gravity="enable"/>
+  </option>
+  <size njmax="5000" nconmax="5000" nstack="5000000"/>
+  <visual>
+    <quality shadowsize="2048"/>
+    <map stiffness="7015" fogstart="10" fogend="15" zfar="40" shadowscale="0.5"/>
+    <rgba haze="0.14999999999999999 0.25 0.34999999999999998 1"/>
+  </visual>
+  <default>
+    <default class="/">
+      <default class="8bellows">
+        <joint group="3" type="hinge" pos="0 0 0.010526315789473684" limited="true" stiffness="1360" range="-0.087266462599716474 0.087266462599716474" damping="75"/>
+        <geom type="cylinder" size="0.125 0.005263157894736842" rgba="0.80000000000000004 0.20000000000000001 0.10000000000000001 1"/>
+      </default>
+      <default class="4bellows">
+        <joint group="3" type="hinge" pos="0 0 0.010526315789473684" limited="true" stiffness="270" range="-0.15707963267948966 0.15707963267948966" damping="20"/>
+        <geom type="cylinder" size="0.080000000000000002 0.005263157894736842" rgba="0.80000000000000004 0.20000000000000001 0.10000000000000001 1"/>
+      </default>
+    </default>
+  </default>
+  <asset>
+    <texture name="texplane" type="2d" builtin="checker" rgb1="0.20000000000000001 0.29999999999999999 0.4000000000000002" rgb2="0.10000000000000001 0.14999999999999999 0.20000000000000001" mark="cross" markrgb="0.80000000000000004 0.80000000000000004 0.80000000000000004" width="512" height="512"/>
+    <material name="matplane" class="/" texture="texplane" texuniform="true" reflectance="0.29999999999999999"/>
+    <mesh name="link0" class="/" file="link0.stl"/>
+    <mesh name="link1" class="/" file="link1.stl"/>
+  </asset>
+  <worldbody>
+    <geom name="world" class="/" type="plane" condim="1" size="0 0 1" material="matplane"/>
+    <light name="//unnamed_light_0" class="/" directional="true" pos="0 0 4" dir="0 0 -1" diffuse="0.59999999999999998 0.59999999999999998 0.59999999999999998" specular="0.20000000000000001 0.20000000000000001 0.20000000000000001"/>
+    <body name="base" pos="0 0 0.1400000000000001" euler="0 0 45">
+      <geom name="base" class="/" type="box" size="0.19685 0.19685 0.1400000000000001" rgba="0 0 0 1" pos="0 0 0"/>
+      <inertial pos="0 0 0" mass="0.013599999999999999" diaginertia="0.0008497 0.0008497 0.0016992000000000001"/>
+      <body name="0_B0" childclass="8bellows" pos="0 0 0.14526315789473684" euler="0 0 -45">
+        <geom name="0_G0"/>
+        <inertial pos="0 0 0" mass="0.26529999999999998" diaginertia="0.0010387778018236379 0.0010387778018236379 0.0020726562499999998"/>
+        <site name="0_bottom" pos="0 0 0"/>
+        <body name="0_B1" pos="0 0 0.021052631578947368">
+          <geom name="0_G1"/>
+          <inertial pos="0 0 0" mass="0.26529999999999998" diaginertia="0.0010387778018236379 0.0010387778018236379 0.0020726562499999998"/>
+          <joint name="0_Jx_1" axis="1 0 0"/>
+          <joint name="0_Jy_1" axis="0 1 0"/>
+          <body name="0_B2" pos="0 0 0.021052631578947368">
+            <geom name="0_G2"/>
+            <inertial pos="0 0 0" mass="0.26529999999999998" diaginertia="0.0010387778018236379 0.0010387778018236379 0.0020726562499999998"/>
+            <joint name="0_Jx_2" axis="1 0 0"/>
+            <joint name="0_Jy_2" axis="0 1 0"/>
+            <body name="0_B3" pos="0 0 0.021052631578947368">
+              <geom name="0_G3"/>
+              <inertial pos="0 0 0" mass="0.26529999999999998" diaginertia="0.0010387778018236379 0.0010387778018236379 0.0020726562499999998"/>
+              <joint name="0_Jx_3" axis="1 0 0"/>
+              <joint name="0_Jy_3" axis="0 1 0"/>
+              <body name="0_B4" pos="0 0 0.021052631578947368">
+                <geom name="0_G4"/>
+                <inertial pos="0 0 0" mass="0.26529999999999998" diaginertia="0.0010387778018236379 0.0010387778018236379 0.0020726562499999998"/>
+                <joint name="0_Jx_4" axis="1 0 0"/>
+                <joint name="0_Jy_4" axis="0 1 0"/>
+                <body name="0_B5" pos="0 0 0.021052631578947368">
+                  <geom name="0_G5"/>
+                  <inertial pos="0 0 0" mass="0.26529999999999998" diaginertia="0.0010387778018236379 0.0010387778018236379 0.0020726562499999998"/>
+                  <joint name="0_Jx_5" axis="1 0 0"/>
+                  <joint name="0_Jy_5" axis="0 1 0"/>
+                  <body name="0_B6" pos="0 0 0.021052631578947368">
+                    <geom name="0_G6"/>
+                    <inertial pos="0 0 0" mass="0.26529999999999998" diaginertia="0.0010387778018236379 0.0010387778018236379 0.0020726562499999998"/>
+                    <joint name="0_Jx_6" axis="1 0 0"/>
+                    <joint name="0_Jy_6" axis="0 1 0"/>
+                    <body name="0_B7" pos="0 0 0.021052631578947368">
+                      <geom name="0_G7"/>
+                      <inertial pos="0 0 0" mass="0.26529999999999998" diaginertia="0.0010387778018236379 0.0010387778018236379 0.0020726562499999998"/>
+                      <joint name="0_Jx_7" axis="1 0 0"/>
+                      <joint name="0_Jy_7" axis="0 1 0"/>
+                      <body name="0_B8" pos="0 0 0.021052631578947368">
+                        <geom name="0_G8"/>
+                        <inertial pos="0 0 0" mass="0.26529999999999998" diaginertia="0.0010387778018236379 0.0010387778018236379 0.0020726562499999998"/>
+                        <joint name="0_Jx_8" axis="1 0 0"/>
+                        <joint name="0_Jy_8" axis="0 1 0"/>
+                        <body name="0_B9" pos="0 0 0.021052631578947368">
+                          <geom name="0_G9"/>
+                          <inertial pos="0 0 0" mass="0.26529999999999998" diaginertia="0.0010387778018236379 0.0010387778018236379 0.0020726562499999998"/>
+                          <joint name="0_Jx_9" axis="1 0 0"/>
+                          <joint name="0_Jy_9" axis="0 1 0"/>
+                          <body name="link0" pos="0 0 0.005263157894736842">
+                            <inertial pos="0 0 0.115" mass="3.8809999999999998" diaginertia="0.108 0.108 0.023"/>
+                            <geom name="link0" type="mesh" rgba="0.5 0.5 0.5 1" mesh="link0"/>
+                            <body name="1_B0" childclass="4bellows" pos="-0.0223 0.0223 0.28199999999999997" axisangle="1 1 0 -45">
+                              <geom name="1_G0"/>
+                              <inertial pos="0 0 0" mass="0.1326" diaginertia="0.00021338437673130195 0.00021338437673130195 0.00042432"/>
+                              <site name="1_bottom" pos="0 0 0"/>
+                              <body name="1_B1" pos="0 0 0.021052631578947368">
+                                <geom name="1_G1"/>
+                                <inertial pos="0 0 0" mass="0.1326" diaginertia="0.00021338437673130195 0.00021338437673130195 0.00042432"/>
+                                <joint name="1_Jx_1" axis="1 0 0"/>
+                                <joint name="1_Jy_1" axis="0 1 0"/>
+                                <body name="1_B2" pos="0 0 0.021052631578947368">
+                                  <geom name="1_G2"/>
+                                  <inertial pos="0 0 0" mass="0.1326" diaginertia="0.00021338437673130195 0.00021338437673130195 0.00042432"/>
+                                  <joint name="1_Jx_2" axis="1 0 0"/>
+                                  <joint name="1_Jy_2" axis="0 1 0"/>
+                                  <body name="1_B3" pos="0 0 0.021052631578947368">
+                                    <geom name="1_G3"/>
+                                    <inertial pos="0 0 0" mass="0.1326" diaginertia="0.00021338437673130195 0.00021338437673130195 0.00042432"/>
+                                    <joint name="1_Jx_3" axis="1 0 0"/>
+                                    <joint name="1_Jy_3" axis="0 1 0"/>
+                                    <body name="1_B4" pos="0 0 0.021052631578947368">
+                                      <geom name="1_G4"/>
+                                      <inertial pos="0 0 0" mass="0.1326" diaginertia="0.00021338437673130195 0.00021338437673130195 0.00042432"/>
+                                      <joint name="1_Jx_4" axis="1 0 0"/>
+                                      <joint name="1_Jy_4" axis="0 1 0"/>
+                                      <body name="1_B5" pos="0 0 0.021052631578947368">
+                                        <geom name="1_G5"/>
+                                        <inertial pos="0 0 0" mass="0.1326" diaginertia="0.00021338437673130195 0.00021338437673130195 0.00042432"/>
+                                        <joint name="1_Jx_5" axis="1 0 0"/>
+                                        <joint name="1_Jy_5" axis="0 1 0"/>
+                                        <body name="1_B6" pos="0 0 0.021052631578947368">
+                                          <geom name="1_G6"/>
+                                          <inertial pos="0 0 0" mass="0.1326" diaginertia="0.00021338437673130195 0.00021338437673130195 0.00042432"/>
+                                          <joint name="1_Jx_6" axis="1 0 0"/>
+                                          <joint name="1_Jy_6" axis="0 1 0"/>
+                                          <body name="1_B7" pos="0 0 0.021052631578947368">
+                                            <geom name="1_G7"/>
+                                            <inertial pos="0 0 0" mass="0.1326" diaginertia="0.00021338437673130195 0.00021338437673130195 0.00042432"/>
+                                            <joint name="1_Jx_7" axis="1 0 0"/>
+                                            <joint name="1_Jy_7" axis="0 1 0"/>
+                                            <body name="1_B8" pos="0 0 0.021052631578947368">
+                                              <geom name="1_G8"/>
+                                              <inertial pos="0 0 0" mass="0.1326" diaginertia="0.00021338437673130195 0.00021338437673130195 0.00042432"/>
+                                              <joint name="1_Jx_8" axis="1 0 0"/>
+                                              <joint name="1_Jy_8" axis="0 1 0"/>
+                                              <body name="1_B9" pos="0 0 0.021052631578947368">
+                                                <geom name="1_G9"/>
+                                                <inertial pos="0 0 0" mass="0.1326" diaginertia="0.00021338437673130195 0.00021338437673130195 0.00042432"/>
+                                                <joint name="1_Jx_9" axis="1 0 0"/>
+                                                <joint name="1_Jy_9" axis="0 1 0"/>
+                                                <body name="link1" pos="0 0 0.005263157894736842">
+                                                  <inertial pos="-0.070000000000000007 0.070000000000000007 0.13" mass="3.474000000000002" diaginertia="0.050000000000000003 0.050000000000000003 0.017000000000000001"/>
+                                                  <geom name="link1" type="mesh" rgba="0.5 0.5 0.5 1" mesh="link1"/>
+                                                  <body name="2_B0" childclass="4bellows" pos="-0.10299999999999999 0.10299999999999999 0.19" axisangle="1 1 0 -45">
+                                                    <geom name="2_G0"/>
+                                                    <inertial pos="0 0 0" mass="0.1326" diaginertia="0.00021338437673130195 0.00021338437673130195 0.00042432"/>
+                                                    <site name="2_bottom" pos="0 0 0"/>
+                                                    <body name="2_B1" pos="0 0 0.021052631578947368">
+                                                      <geom name="2_G1"/>
+                                                      <inertial pos="0 0 0" mass="0.1326" diaginertia="0.00021338437673130195 0.00021338437673130195 0.00042432"/>
+                                                      <joint name="2_Jx_1" axis="1 0 0"/>
+                                                      <joint name="2_Jy_1" axis="0 1 0"/>
+                                                      <body name="2_B2" pos="0 0 0.021052631578947368">
+                                                        <geom name="2_G2"/>
+                                                        <inertial pos="0 0 0" mass="0.1326" diaginertia="0.00021338437673130195 0.00021338437673130195 0.00042432"/>
+                                                        <joint name="2_Jx_2" axis="1 0 0"/>
+                                                        <joint name="2_Jy_2" axis="0 1 0"/>
+                                                        <body name="2_B3" pos="0 0 0.021052631578947368">
+                                                          <geom name="2_G3"/>
+                                                          <inertial pos="0 0 0" mass="0.1326" diaginertia="0.00021338437673130195 0.00021338437673130195 0.00042432"/>
+                                                          <joint name="2_Jx_3" axis="1 0 0"/>
+                                                          <joint name="2_Jy_3" axis="0 1 0"/>
+                                                          <body name="2_B4" pos="0 0 0.021052631578947368">
+                                                            <geom name="2_G4"/>
+                                                            <inertial pos="0 0 0" mass="0.1326" diaginertia="0.00021338437673130195 0.00021338437673130195 0.00042432"/>
+                                                            <joint name="2_Jx_4" axis="1 0 0"/>
+                                                            <joint name="2_Jy_4" axis="0 1 0"/>
+                                                            <body name="2_B5" pos="0 0 0.021052631578947368">
+                                                            <geom name="2_G5"/>
+                                                            <inertial pos="0 0 0" mass="0.1326" diaginertia="0.00021338437673130195 0.00021338437673130195 0.00042432"/>
+                                                            <joint name="2_Jx_5" axis="1 0 0"/>
+                                                            <joint name="2_Jy_5" axis="0 1 0"/>
+                                                            <body name="2_B6" pos="0 0 0.021052631578947368">
+                                                            <geom name="2_G6"/>
+                                                            <inertial pos="0 0 0" mass="0.1326" diaginertia="0.00021338437673130195 0.00021338437673130195 0.00042432"/>
+                                                            <joint name="2_Jx_6" axis="1 0 0"/>
+                                                            <joint name="2_Jy_6" axis="0 1 0"/>
+                                                            <body name="2_B7" pos="0 0 0.021052631578947368">
+                                                            <geom name="2_G7"/>
+                                                            <inertial pos="0 0 0" mass="0.1326" diaginertia="0.00021338437673130195 0.00021338437673130195 0.00042432"/>
+                                                            <joint name="2_Jx_7" axis="1 0 0"/>
+                                                            <joint name="2_Jy_7" axis="0 1 0"/>
+                                                            <body name="2_B8" pos="0 0 0.021052631578947368">
+                                                            <geom name="2_G8"/>
+                                                            <inertial pos="0 0 0" mass="0.1326" diaginertia="0.00021338437673130195 0.00021338437673130195 0.00042432"/>
+                                                            <joint name="2_Jx_8" axis="1 0 0"/>
+                                                            <joint name="2_Jy_8" axis="0 1 0"/>
+                                                            <body name="2_B9" pos="0 0 0.021052631578947368">
+                                                            <geom name="2_G9"/>
+                                                            <inertial pos="0 0 0" mass="0.1326" diaginertia="0.00021338437673130195 0.00021338437673130195 0.00042432"/>
+                                                            <joint name="2_Jx_9" axis="1 0 0"/>
+                                                            <joint name="2_Jy_9" axis="0 1 0"/>
+                                                            </body>
+                                                            </body>
+                                                            </body>
+                                                            </body>
+                                                            </body>
+                                                          </body>
+                                                        </body>
+                                                      </body>
+                                                    </body>
+                                                  </body>
+                                                </body>
+                                              </body>
+                                            </body>
+                                          </body>
+                                        </body>
+                                      </body>
+                                    </body>
+                                  </body>
+                                </body>
+                              </body>
+                            </body>
+                          </body>
+                        </body>
+                      </body>
+                    </body>
+                  </body>
+                </body>
+              </body>
+            </body>
+          </body>
+        </body>
+      </body>
+    </body>
+  </worldbody>
+  <tendon>
+    <fixed name="x0" class="/">
+      <joint joint="0_Jx_1" coef="1"/>
+      <joint joint="0_Jx_2" coef="1"/>
+      <joint joint="0_Jx_3" coef="1"/>
+      <joint joint="0_Jx_4" coef="1"/>
+      <joint joint="0_Jx_5" coef="1"/>
+      <joint joint="0_Jx_6" coef="1"/>
+      <joint joint="0_Jx_7" coef="1"/>
+      <joint joint="0_Jx_8" coef="1"/>
+      <joint joint="0_Jx_9" coef="1"/>
+    </fixed>
+    <fixed name="y0" class="/">
+      <joint joint="0_Jy_1" coef="1"/>
+      <joint joint="0_Jy_2" coef="1"/>
+      <joint joint="0_Jy_3" coef="1"/>
+      <joint joint="0_Jy_4" coef="1"/>
+      <joint joint="0_Jy_5" coef="1"/>
+      <joint joint="0_Jy_6" coef="1"/>
+      <joint joint="0_Jy_7" coef="1"/>
+      <joint joint="0_Jy_8" coef="1"/>
+      <joint joint="0_Jy_9" coef="1"/>
+    </fixed>
+    <fixed name="x1" class="/">
+      <joint joint="1_Jx_1" coef="1"/>
+      <joint joint="1_Jx_2" coef="1"/>
+      <joint joint="1_Jx_3" coef="1"/>
+      <joint joint="1_Jx_4" coef="1"/>
+      <joint joint="1_Jx_5" coef="1"/>
+      <joint joint="1_Jx_6" coef="1"/>
+      <joint joint="1_Jx_7" coef="1"/>
+      <joint joint="1_Jx_8" coef="1"/>
+      <joint joint="1_Jx_9" coef="1"/>
+    </fixed>
+    <fixed name="y1" class="/">
+      <joint joint="1_Jy_1" coef="1"/>
+      <joint joint="1_Jy_2" coef="1"/>
+      <joint joint="1_Jy_3" coef="1"/>
+      <joint joint="1_Jy_4" coef="1"/>
+      <joint joint="1_Jy_5" coef="1"/>
+      <joint joint="1_Jy_6" coef="1"/>
+      <joint joint="1_Jy_7" coef="1"/>
+      <joint joint="1_Jy_8" coef="1"/>
+      <joint joint="1_Jy_9" coef="1"/>
+    </fixed>
+    <fixed name="x2" class="/">
+      <joint joint="2_Jx_1" coef="1"/>
+      <joint joint="2_Jx_2" coef="1"/>
+      <joint joint="2_Jx_3" coef="1"/>
+      <joint joint="2_Jx_4" coef="1"/>
+      <joint joint="2_Jx_5" coef="1"/>
+      <joint joint="2_Jx_6" coef="1"/>
+      <joint joint="2_Jx_7" coef="1"/>
+      <joint joint="2_Jx_8" coef="1"/>
+      <joint joint="2_Jx_9" coef="1"/>
+    </fixed>
+    <fixed name="y2" class="/">
+      <joint joint="2_Jy_1" coef="1"/>
+      <joint joint="2_Jy_2" coef="1"/>
+      <joint joint="2_Jy_3" coef="1"/>
+      <joint joint="2_Jy_4" coef="1"/>
+      <joint joint="2_Jy_5" coef="1"/>
+      <joint joint="2_Jy_6" coef="1"/>
+      <joint joint="2_Jy_7" coef="1"/>
+      <joint joint="2_Jy_8" coef="1"/>
+      <joint joint="2_Jy_9" coef="1"/>
+    </fixed>
+  </tendon>
+  <actuator>
+    <cylinder name="p0_j0" class="/" ctrllimited="true" ctrlrange="0 400000" gear="0.10000000000000001" tendon="x0" timeconst="0.20000000000000001" diameter="0.070710678118654766"/>
+    <cylinder name="p1_j0" class="/" ctrllimited="true" ctrlrange="0 400000" gear="-0.10000000000000001" tendon="x0" timeconst="0.20000000000000001" diameter="0.070710678118654766"/>
+    <cylinder name="p2_j0" class="/" ctrllimited="true" ctrlrange="0 400000" gear="0.10000000000000001" tendon="y0" timeconst="0.20000000000000001" diameter="0.070710678118654766"/>
+    <cylinder name="p3_j0" class="/" ctrllimited="true" ctrlrange="0 400000" gear="-0.10000000000000001" tendon="y0" timeconst="0.20000000000000001" diameter="0.070710678118654766"/>
+    <cylinder name="p0_j1" class="/" ctrllimited="true" ctrlrange="0 400000" gear="0.050000000000000003" tendon="x1" timeconst="0.5" diameter="0.050000000000000003"/>
+    <cylinder name="p1_j1" class="/" ctrllimited="true" ctrlrange="0 400000" gear="-0.050000000000000003" tendon="x1" timeconst="0.5" diameter="0.050000000000000003"/>
+    <cylinder name="p2_j1" class="/" ctrllimited="true" ctrlrange="0 400000" gear="0.050000000000000003" tendon="y1" timeconst="0.5" diameter="0.050000000000000003"/>
+    <cylinder name="p3_j1" class="/" ctrllimited="true" ctrlrange="0 400000" gear="-0.050000000000000003" tendon="y1" timeconst="0.5" diameter="0.050000000000000003"/>
+    <cylinder name="p0_j2" class="/" ctrllimited="true" ctrlrange="0 400000" gear="0.050000000000000003" tendon="x2" timeconst="0.80000000000000004" diameter="0.050000000000000003"/>
+    <cylinder name="p1_j2" class="/" ctrllimited="true" ctrlrange="0 400000" gear="-0.050000000000000003" tendon="x2" timeconst="0.80000000000000004" diameter="0.050000000000000003"/>
+    <cylinder name="p2_j2" class="/" ctrllimited="true" ctrlrange="0 400000" gear="0.050000000000000003" tendon="y2" timeconst="0.80000000000000004" diameter="0.050000000000000003"/>
+    <cylinder name="p3_j2" class="/" ctrllimited="true" ctrlrange="0 400000" gear="-0.050000000000000003" tendon="y2" timeconst="0.80000000000000004" diameter="0.050000000000000003"/>
+  </actuator>
+  <sensor>
+    <tendonpos name="u0" tendon="x0"/>
+    <tendonpos name="v0" tendon="y0"/>
+    <tendonpos name="u1" tendon="x1"/>
+    <tendonpos name="v1" tendon="y1"/>
+    <tendonpos name="u2" tendon="x2"/>
+    <tendonpos name="v2" tendon="y2"/>
+    <tendonvel name="ud0" tendon="x0"/>
+    <tendonvel name="vd0" tendon="y0"/>
+    <tendonvel name="ud1" tendon="x1"/>
+    <tendonvel name="vd1" tendon="y1"/>
+    <tendonvel name="ud2" tendon="x2"/>
+    <tendonvel name="vd2" tendon="y2"/>
+  </sensor>
+</mujoco>

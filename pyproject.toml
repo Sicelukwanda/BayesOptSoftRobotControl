@@ -1,0 +1,59 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "bellows_arm_control"
+description = "MuJoCo environment for Bellows Arm"
+readme = "README.md"
+authors = [
+  { name = "Sicelukwanda Zwane", email = "sicelukwanda.zwane@gmail.com" },
+  { name = "Curtis Johnson", email = "curtiscarljohnson@gmail.com"},
+  { name = "Yicheng Luo", email = "ethanluoyc@gmail.com" },
+]
+requires-python = ">=3.8"
+dependencies = [
+  "mujoco>=2.3.5,<3.0.0",
+  "dm-control",
+  "numpy",
+  "absl-py",
+  "dm-env",
+]
+version = "0.1.0"
+classifiers = [
+  "Development Status :: 4 - Beta",
+  "Programming Language :: Python",
+  "Programming Language :: Python :: 3.8",
+  "Programming Language :: Python :: 3.9",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: Implementation :: CPython",
+]
+
+[tool.ruff]
+line-length = 120
+
+[tool.ruff.lint]
+select = [
+  "E", # pycodestyle
+  "F", # pyflakes
+  "I",
+]
+ignore = ["E731"]
+exclude = [".venv"]
+
+[tool.ruff.lint.extend-per-file-ignores]
+"__init__.py" = ["F401"]
+
+[tool.ruff.lint.isort]
+known-first-party = ["bellows_arm_control"]
+force-single-line = true
+force-sort-within-sections = true
+single-line-exclusions = ["typing"]
+
+[tool.ruff.lint.flake8-tidy-imports]
+ban-relative-imports = "all"
+
+[tool.pytest.ini_options]
+minversion = "6.0"
+testpaths = ["tests"]

@@ -1,0 +1,459 @@
+<mujoco model="bellows_arm">
+  <compiler autolimits="true" angle="radian"/>
+  <option timestep="0.001" impratio="10" cone="elliptic" jacobian="sparse" solver="Newton" iterations="50" tolerance="1e-10">
+    <flag gravity="enable"/>
+  </option>
+  <size njmax="5000" nconmax="5000" nstack="5000000"/>
+  <visual>
+    <quality shadowsize="2048"/>
+    <map stiffness="7015" fogstart="10" fogend="15" zfar="40" shadowscale="0.5"/>
+    <rgba haze="0.14999999999999999 0.25 0.34999999999999998 1"/>
+  </visual>
+  <default>
+    <default class="/">
+      <default class="8bellows">
+        <joint group="3" type="hinge" pos="0 0 0.010526315789473684" limited="true" stiffness="1360" range="-0.087266462599716474 0.087266462599716474" damping="75"/>
+        <geom type="cylinder" size="0.125 0.005263157894736842" rgba="0.80000000000000004 0.20000000000000001 0.10000000000000001 1"/>
+      </default>
+      <default class="4bellows">
+        <joint group="3" type="hinge" pos="0 0 0.010526315789473684" limited="true" stiffness="270" range="-0.15707963267948966 0.15707963267948966" damping="20"/>
+        <geom type="cylinder" size="0.080000000000000002 0.005263157894736842" rgba="0.80000000000000004 0.20000000000000001 0.10000000000000001 1"/>
+      </default>
+    </default>
+    <default class="robotiq_2f85/">
+      <default class="robotiq_2f85/2f85">
+        <mesh scale="0.001 0.001 0.001"/>
+        <joint axis="1 0 0"/>
+        <general biastype="affine"/>
+        <default class="robotiq_2f85/driver">
+          <joint solreflimit="0.0050000000000000001 1" solimplimit="0.94999999999999996 0.98999999999999999 0.001" range="0 0.80000000000000004" armature="0.0050000000000000001" damping="0.10000000000000001"/>
+        </default>
+        <default class="robotiq_2f85/follower">
+          <joint pos="0 -0.017999999999999999 0.0064999999999999997" solreflimit="0.0050000000000000001 1" solimplimit="0.94999999999999996 0.98999999999999999 0.001" range="-0.872664 0.872664"/>
+        </default>
+        <default class="robotiq_2f85/spring_link">
+          <joint stiffness="0.050000000000000003" range="-0.29670597283 0.80000000000000004" springref="2.6200000000000001" damping="0.00125"/>
+        </default>
+        <default class="robotiq_2f85/coupler">
+          <joint solreflimit="0.0050000000000000001 1" solimplimit="0.94999999999999996 0.98999999999999999 0.001" range="-1.5700000000000001 0"/>
+        </default>
+        <default class="robotiq_2f85/visual">
+          <geom type="mesh" contype="0" conaffinity="0" group="2"/>
+        </default>
+        <default class="robotiq_2f85/collision">
+          <geom type="mesh" group="3"/>
+          <default class="robotiq_2f85/pad_box1">
+            <geom type="box" priority="1" size="0.010999999999999999 0.0040000000000000001 0.0093749999999999997" rgba="0.55000000000000004 0.55000000000000004 0.55000000000000004 1" friction="0.69999999999999996" mass="0" solref="0.0040000000000000001 1" solimp="0.94999999999999996 0.98999999999999999 0.001" pos="0 -0.0025999999999999999 0.028125000000000001"/>
+          </default>
+          <default class="robotiq_2f85/pad_box2">
+            <geom type="box" priority="1" size="0.010999999999999999 0.0040000000000000001 0.0093749999999999997" rgba="0.45000000000000001 0.45000000000000001 0.45000000000000001 1" friction="0.59999999999999998" mass="0" solref="0.0040000000000000001 1" solimp="0.94999999999999996 0.98999999999999999 0.001" pos="0 -0.0025999999999999999 0.0093749999999999997"/>
+          </default>
+        </default>
+      </default>
+    </default>
+  </default>
+  <asset>
+    <texture name="texplane" type="2d" builtin="checker" rgb1="0.20000000000000001 0.29999999999999999 0.40000000000000002" rgb2="0.10000000000000001 0.14999999999999999 0.20000000000000001" mark="cross" markrgb="0.80000000000000004 0.80000000000000004 0.80000000000000004" width="512" height="512"/>
+    <material name="matplane" class="/" texture="texplane" texuniform="true" reflectance="0.29999999999999999"/>
+    <mesh name="link0" class="/" file="link0.stl"/>
+    <mesh name="link1" class="/" file="link1.stl"/>
+    <material name="robotiq_2f85/metal" class="robotiq_2f85/" rgba="0.57999999999999996 0.57999999999999996 0.57999999999999996 1"/>
+    <material name="robotiq_2f85/silicone" class="robotiq_2f85/" rgba="0.18820000000000001 0.18820000000000001 0.18820000000000001 1"/>
+    <material name="robotiq_2f85/gray" class="robotiq_2f85/" rgba="0.4627 0.4627 0.4627 1"/>
+    <material name="robotiq_2f85/black" class="robotiq_2f85/" rgba="0.14899999999999999 0.14899999999999999 0.14899999999999999 1"/>
+    <mesh name="robotiq_2f85/base_mount" class="robotiq_2f85/2f85" file="base_mount.stl"/>
+    <mesh name="robotiq_2f85/base" class="robotiq_2f85/2f85" file="base.stl"/>
+    <mesh name="robotiq_2f85/driver" class="robotiq_2f85/2f85" file="driver.stl"/>
+    <mesh name="robotiq_2f85/coupler" class="robotiq_2f85/2f85" file="coupler.stl"/>
+    <mesh name="robotiq_2f85/follower" class="robotiq_2f85/2f85" file="follower.stl"/>
+    <mesh name="robotiq_2f85/pad" class="robotiq_2f85/2f85" file="pad.stl"/>
+    <mesh name="robotiq_2f85/silicone_pad" class="robotiq_2f85/2f85" file="silicone_pad.stl"/>
+    <mesh name="robotiq_2f85/spring_link" class="robotiq_2f85/2f85" file="spring_link.stl"/>
+  </asset>
+  <worldbody>
+    <geom name="world" class="/" type="plane" condim="1" size="0 0 1" material="matplane"/>
+    <light name="//unnamed_light_0" class="/" directional="true" pos="0 0 4" dir="0 0 -1" diffuse="0.59999999999999998 0.59999999999999998 0.59999999999999998" specular="0.20000000000000001 0.20000000000000001 0.20000000000000001"/>
+    <body name="base" pos="0 0 0.14000000000000001" euler="0 0 45">
+      <geom name="base" class="/" type="box" size="0.19685 0.19685 0.14000000000000001" rgba="0 0 0 1" pos="0 0 0"/>
+      <inertial pos="0 0 0" mass="0.013599999999999999" diaginertia="0.0008497 0.0008497 0.0016992000000000001"/>
+      <body name="0_B0" childclass="8bellows" pos="0 0 0.14526315789473684" euler="0 0 -45">
+        <geom name="0_G0"/>
+        <inertial pos="0 0 0" mass="0.26529999999999998" diaginertia="0.0010387778018236379 0.0010387778018236379 0.0020726562499999998"/>
+        <site name="0_bottom" pos="0 0 0"/>
+        <body name="0_B1" pos="0 0 0.021052631578947368">
+          <geom name="0_G1"/>
+          <inertial pos="0 0 0" mass="0.26529999999999998" diaginertia="0.0010387778018236379 0.0010387778018236379 0.0020726562499999998"/>
+          <joint name="0_Jx_1" axis="1 0 0"/>
+          <joint name="0_Jy_1" axis="0 1 0"/>
+          <body name="0_B2" pos="0 0 0.021052631578947368">
+            <geom name="0_G2"/>
+            <inertial pos="0 0 0" mass="0.26529999999999998" diaginertia="0.0010387778018236379 0.0010387778018236379 0.0020726562499999998"/>
+            <joint name="0_Jx_2" axis="1 0 0"/>
+            <joint name="0_Jy_2" axis="0 1 0"/>
+            <body name="0_B3" pos="0 0 0.021052631578947368">
+              <geom name="0_G3"/>
+              <inertial pos="0 0 0" mass="0.26529999999999998" diaginertia="0.0010387778018236379 0.0010387778018236379 0.0020726562499999998"/>
+              <joint name="0_Jx_3" axis="1 0 0"/>
+              <joint name="0_Jy_3" axis="0 1 0"/>
+              <body name="0_B4" pos="0 0 0.021052631578947368">
+                <geom name="0_G4"/>
+                <inertial pos="0 0 0" mass="0.26529999999999998" diaginertia="0.0010387778018236379 0.0010387778018236379 0.0020726562499999998"/>
+                <joint name="0_Jx_4" axis="1 0 0"/>
+                <joint name="0_Jy_4" axis="0 1 0"/>
+                <body name="0_B5" pos="0 0 0.021052631578947368">
+                  <geom name="0_G5"/>
+                  <inertial pos="0 0 0" mass="0.26529999999999998" diaginertia="0.0010387778018236379 0.0010387778018236379 0.0020726562499999998"/>
+                  <joint name="0_Jx_5" axis="1 0 0"/>
+                  <joint name="0_Jy_5" axis="0 1 0"/>
+                  <body name="0_B6" pos="0 0 0.021052631578947368">
+                    <geom name="0_G6"/>
+                    <inertial pos="0 0 0" mass="0.26529999999999998" diaginertia="0.0010387778018236379 0.0010387778018236379 0.0020726562499999998"/>
+                    <joint name="0_Jx_6" axis="1 0 0"/>
+                    <joint name="0_Jy_6" axis="0 1 0"/>
+                    <body name="0_B7" pos="0 0 0.021052631578947368">
+                      <geom name="0_G7"/>
+                      <inertial pos="0 0 0" mass="0.26529999999999998" diaginertia="0.0010387778018236379 0.0010387778018236379 0.0020726562499999998"/>
+                      <joint name="0_Jx_7" axis="1 0 0"/>
+                      <joint name="0_Jy_7" axis="0 1 0"/>
+                      <body name="0_B8" pos="0 0 0.021052631578947368">
+                        <geom name="0_G8"/>
+                        <inertial pos="0 0 0" mass="0.26529999999999998" diaginertia="0.0010387778018236379 0.0010387778018236379 0.0020726562499999998"/>
+                        <joint name="0_Jx_8" axis="1 0 0"/>
+                        <joint name="0_Jy_8" axis="0 1 0"/>
+                        <body name="0_B9" pos="0 0 0.021052631578947368">
+                          <geom name="0_G9"/>
+                          <inertial pos="0 0 0" mass="0.26529999999999998" diaginertia="0.0010387778018236379 0.0010387778018236379 0.0020726562499999998"/>
+                          <joint name="0_Jx_9" axis="1 0 0"/>
+                          <joint name="0_Jy_9" axis="0 1 0"/>
+                          <body name="link0" pos="0 0 0.005263157894736842">
+                            <inertial pos="0 0 0.115" mass="3.8809999999999998" diaginertia="0.108 0.108 0.023"/>
+                            <geom name="link0" type="mesh" rgba="0.5 0.5 0.5 1" mesh="link0"/>
+                            <body name="1_B0" childclass="4bellows" pos="-0.0223 0.0223 0.28199999999999997" axisangle="1 1 0 -0.78539816339744828">
+                              <geom name="1_G0"/>
+                              <inertial pos="0 0 0" mass="0.1326" diaginertia="0.00021338437673130195 0.00021338437673130195 0.00042432"/>
+                              <site name="1_bottom" pos="0 0 0"/>
+                              <body name="1_B1" pos="0 0 0.021052631578947368">
+                                <geom name="1_G1"/>
+                                <inertial pos="0 0 0" mass="0.1326" diaginertia="0.00021338437673130195 0.00021338437673130195 0.00042432"/>
+                                <joint name="1_Jx_1" axis="1 0 0"/>
+                                <joint name="1_Jy_1" axis="0 1 0"/>
+                                <body name="1_B2" pos="0 0 0.021052631578947368">
+                                  <geom name="1_G2"/>
+                                  <inertial pos="0 0 0" mass="0.1326" diaginertia="0.00021338437673130195 0.00021338437673130195 0.00042432"/>
+                                  <joint name="1_Jx_2" axis="1 0 0"/>
+                                  <joint name="1_Jy_2" axis="0 1 0"/>
+                                  <body name="1_B3" pos="0 0 0.021052631578947368">
+                                    <geom name="1_G3"/>
+                                    <inertial pos="0 0 0" mass="0.1326" diaginertia="0.00021338437673130195 0.00021338437673130195 0.00042432"/>
+                                    <joint name="1_Jx_3" axis="1 0 0"/>
+                                    <joint name="1_Jy_3" axis="0 1 0"/>
+                                    <body name="1_B4" pos="0 0 0.021052631578947368">
+                                      <geom name="1_G4"/>
+                                      <inertial pos="0 0 0" mass="0.1326" diaginertia="0.00021338437673130195 0.00021338437673130195 0.00042432"/>
+                                      <joint name="1_Jx_4" axis="1 0 0"/>
+                                      <joint name="1_Jy_4" axis="0 1 0"/>
+                                      <body name="1_B5" pos="0 0 0.021052631578947368">
+                                        <geom name="1_G5"/>
+                                        <inertial pos="0 0 0" mass="0.1326" diaginertia="0.00021338437673130195 0.00021338437673130195 0.00042432"/>
+                                        <joint name="1_Jx_5" axis="1 0 0"/>
+                                        <joint name="1_Jy_5" axis="0 1 0"/>
+                                        <body name="1_B6" pos="0 0 0.021052631578947368">
+                                          <geom name="1_G6"/>
+                                          <inertial pos="0 0 0" mass="0.1326" diaginertia="0.00021338437673130195 0.00021338437673130195 0.00042432"/>
+                                          <joint name="1_Jx_6" axis="1 0 0"/>
+                                          <joint name="1_Jy_6" axis="0 1 0"/>
+                                          <body name="1_B7" pos="0 0 0.021052631578947368">
+                                            <geom name="1_G7"/>
+                                            <inertial pos="0 0 0" mass="0.1326" diaginertia="0.00021338437673130195 0.00021338437673130195 0.00042432"/>
+                                            <joint name="1_Jx_7" axis="1 0 0"/>
+                                            <joint name="1_Jy_7" axis="0 1 0"/>
+                                            <body name="1_B8" pos="0 0 0.021052631578947368">
+                                              <geom name="1_G8"/>
+                                              <inertial pos="0 0 0" mass="0.1326" diaginertia="0.00021338437673130195 0.00021338437673130195 0.00042432"/>
+                                              <joint name="1_Jx_8" axis="1 0 0"/>
+                                              <joint name="1_Jy_8" axis="0 1 0"/>
+                                              <body name="1_B9" pos="0 0 0.021052631578947368">
+                                                <geom name="1_G9"/>
+                                                <inertial pos="0 0 0" mass="0.1326" diaginertia="0.00021338437673130195 0.00021338437673130195 0.00042432"/>
+                                                <joint name="1_Jx_9" axis="1 0 0"/>
+                                                <joint name="1_Jy_9" axis="0 1 0"/>
+                                                <body name="link1" pos="0 0 0.005263157894736842">
+                                                  <inertial pos="-0.070000000000000007 0.070000000000000007 0.13" mass="3.4740000000000002" diaginertia="0.050000000000000003 0.050000000000000003 0.017000000000000001"/>
+                                                  <geom name="link1" type="mesh" rgba="0.5 0.5 0.5 1" mesh="link1"/>
+                                                  <body name="2_B0" childclass="4bellows" pos="-0.10299999999999999 0.10299999999999999 0.19" axisangle="1 1 0 -0.78539816339744828">
+                                                    <geom name="2_G0"/>
+                                                    <inertial pos="0 0 0" mass="0.1326" diaginertia="0.00021338437673130195 0.00021338437673130195 0.00042432"/>
+                                                    <site name="2_bottom" pos="0 0 0"/>
+                                                    <body name="2_B1" pos="0 0 0.021052631578947368">
+                                                      <geom name="2_G1"/>
+                                                      <inertial pos="0 0 0" mass="0.1326" diaginertia="0.00021338437673130195 0.00021338437673130195 0.00042432"/>
+                                                      <joint name="2_Jx_1" axis="1 0 0"/>
+                                                      <joint name="2_Jy_1" axis="0 1 0"/>
+                                                      <body name="2_B2" pos="0 0 0.021052631578947368">
+                                                        <geom name="2_G2"/>
+                                                        <inertial pos="0 0 0" mass="0.1326" diaginertia="0.00021338437673130195 0.00021338437673130195 0.00042432"/>
+                                                        <joint name="2_Jx_2" axis="1 0 0"/>
+                                                        <joint name="2_Jy_2" axis="0 1 0"/>
+                                                        <body name="2_B3" pos="0 0 0.021052631578947368">
+                                                          <geom name="2_G3"/>
+                                                          <inertial pos="0 0 0" mass="0.1326" diaginertia="0.00021338437673130195 0.00021338437673130195 0.00042432"/>
+                                                          <joint name="2_Jx_3" axis="1 0 0"/>
+                                                          <joint name="2_Jy_3" axis="0 1 0"/>
+                                                          <body name="2_B4" pos="0 0 0.021052631578947368">
+                                                            <geom name="2_G4"/>
+                                                            <inertial pos="0 0 0" mass="0.1326" diaginertia="0.00021338437673130195 0.00021338437673130195 0.00042432"/>
+                                                            <joint name="2_Jx_4" axis="1 0 0"/>
+                                                            <joint name="2_Jy_4" axis="0 1 0"/>
+                                                            <body name="2_B5" pos="0 0 0.021052631578947368">
+                                                            <geom name="2_G5"/>
+                                                            <inertial pos="0 0 0" mass="0.1326" diaginertia="0.00021338437673130195 0.00021338437673130195 0.00042432"/>
+                                                            <joint name="2_Jx_5" axis="1 0 0"/>
+                                                            <joint name="2_Jy_5" axis="0 1 0"/>
+                                                            <body name="2_B6" pos="0 0 0.021052631578947368">
+                                                            <geom name="2_G6"/>
+                                                            <inertial pos="0 0 0" mass="0.1326" diaginertia="0.00021338437673130195 0.00021338437673130195 0.00042432"/>
+                                                            <joint name="2_Jx_6" axis="1 0 0"/>
+                                                            <joint name="2_Jy_6" axis="0 1 0"/>
+                                                            <body name="2_B7" pos="0 0 0.021052631578947368">
+                                                            <geom name="2_G7"/>
+                                                            <inertial pos="0 0 0" mass="0.1326" diaginertia="0.00021338437673130195 0.00021338437673130195 0.00042432"/>
+                                                            <joint name="2_Jx_7" axis="1 0 0"/>
+                                                            <joint name="2_Jy_7" axis="0 1 0"/>
+                                                            <body name="2_B8" pos="0 0 0.021052631578947368">
+                                                            <geom name="2_G8"/>
+                                                            <inertial pos="0 0 0" mass="0.1326" diaginertia="0.00021338437673130195 0.00021338437673130195 0.00042432"/>
+                                                            <joint name="2_Jx_8" axis="1 0 0"/>
+                                                            <joint name="2_Jy_8" axis="0 1 0"/>
+                                                            <body name="2_B9" pos="0 0 0.021052631578947368">
+                                                            <geom name="2_G9"/>
+                                                            <inertial pos="0 0 0" mass="0.1326" diaginertia="0.00021338437673130195 0.00021338437673130195 0.00042432"/>
+                                                            <joint name="2_Jx_9" axis="1 0 0"/>
+                                                            <joint name="2_Jy_9" axis="0 1 0"/>
+                                                            <site name="eef_site" rgba="0 0 1 1" pos="0 0 0.015789473684210527"/>
+                                                            <body pos="0 0 0.015789473684210527" name="robotiq_2f85/">
+                                                            <body name="robotiq_2f85/base_mount" childclass="robotiq_2f85/2f85" pos="0 0 0.0070000000000000001">
+                                                            <geom name="robotiq_2f85//unnamed_geom_0" class="robotiq_2f85/visual" material="robotiq_2f85/black" mesh="robotiq_2f85/base_mount"/>
+                                                            <geom name="robotiq_2f85//unnamed_geom_1" class="robotiq_2f85/collision" mesh="robotiq_2f85/base_mount"/>
+                                                            <body name="robotiq_2f85/base" pos="0 0 0.0038" quat="1 0 0 -1">
+                                                            <inertial pos="0 -2.7039400000000001e-05 0.035467499999999999" quat="1 -0.00152849 0 0" mass="0.77744100000000005" diaginertia="0.00026028500000000002 0.000225381 0.00015270799999999999"/>
+                                                            <geom name="robotiq_2f85//unnamed_geom_2" class="robotiq_2f85/visual" material="robotiq_2f85/black" mesh="robotiq_2f85/base"/>
+                                                            <geom name="robotiq_2f85//unnamed_geom_3" class="robotiq_2f85/collision" mesh="robotiq_2f85/base"/>
+                                                            <site name="robotiq_2f85/pinch" type="sphere" group="5" rgba="0.90000000000000002 0.90000000000000002 0.90000000000000002 1" size="0.0050000000000000001" pos="0 0 0.14499999999999999"/>
+                                                            <body name="robotiq_2f85/right_driver" pos="0 0.030601099999999999 0.054904000000000001">
+                                                            <inertial pos="2.96931e-12 0.017754700000000002 0.00107314" quat="0.68130100000000005 0.73200299999999996 0 0" mass="0.0089956299999999993" diaginertia="1.72352e-06 1.6090599999999999e-06 3.22006e-07"/>
+                                                            <joint name="robotiq_2f85/right_driver_joint" class="robotiq_2f85/driver"/>
+                                                            <geom name="robotiq_2f85//unnamed_geom_4" class="robotiq_2f85/visual" material="robotiq_2f85/gray" mesh="robotiq_2f85/driver"/>
+                                                            <geom name="robotiq_2f85//unnamed_geom_5" class="robotiq_2f85/collision" mesh="robotiq_2f85/driver"/>
+                                                            <body name="robotiq_2f85/right_coupler" pos="0 0.0315 -0.0041000000000000003">
+                                                            <inertial pos="0 0.0030120899999999998 0.023217499999999999" quat="0.70563600000000004 -0.045590400000000003 0.045590400000000003 0.70563600000000004" mass="0.0140974" diaginertia="4.1620600000000001e-06 3.5221600000000001e-06 8.8813100000000003e-07"/>
+                                                            <joint name="robotiq_2f85/right_coupler_joint" class="robotiq_2f85/coupler"/>
+                                                            <geom name="robotiq_2f85//unnamed_geom_6" class="robotiq_2f85/visual" material="robotiq_2f85/black" mesh="robotiq_2f85/coupler"/>
+                                                            <geom name="robotiq_2f85//unnamed_geom_7" class="robotiq_2f85/collision" mesh="robotiq_2f85/coupler"/>
+                                                            </body>
+                                                            </body>
+                                                            <body name="robotiq_2f85/right_spring_link" pos="0 0.0132 0.060900000000000003">
+                                                            <inertial pos="-8.6500500000000008e-09 0.018162399999999999 0.021265800000000001" quat="0.66340299999999996 -0.24473700000000001 0.24473700000000001 0.66340299999999996" mass="0.022164199999999998" diaginertia="8.9685299999999993e-06 6.7173299999999996e-06 2.6393100000000001e-06"/>
+                                                            <joint name="robotiq_2f85/right_spring_link_joint" class="robotiq_2f85/spring_link"/>
+                                                            <geom name="robotiq_2f85//unnamed_geom_8" class="robotiq_2f85/visual" material="robotiq_2f85/black" mesh="robotiq_2f85/spring_link"/>
+                                                            <geom name="robotiq_2f85//unnamed_geom_9" class="robotiq_2f85/collision" mesh="robotiq_2f85/spring_link"/>
+                                                            <body name="robotiq_2f85/right_follower" pos="0 0.055 0.037499999999999999">
+                                                            <inertial pos="0 -0.011046 0.012478599999999999" quat="1 0.16639999999999999 0 0" mass="0.012522200000000001" diaginertia="2.6741500000000001e-06 2.4559000000000001e-06 6.0203100000000003e-07"/>
+                                                            <joint name="robotiq_2f85/right_follower_joint" class="robotiq_2f85/follower"/>
+                                                            <geom name="robotiq_2f85//unnamed_geom_10" class="robotiq_2f85/visual" material="robotiq_2f85/black" mesh="robotiq_2f85/follower"/>
+                                                            <geom name="robotiq_2f85//unnamed_geom_11" class="robotiq_2f85/collision" mesh="robotiq_2f85/follower"/>
+                                                            <body name="robotiq_2f85/right_pad" pos="0 -0.0189 0.013520000000000001">
+                                                            <geom name="robotiq_2f85/right_pad1" class="robotiq_2f85/pad_box1"/>
+                                                            <geom name="robotiq_2f85/right_pad2" class="robotiq_2f85/pad_box2"/>
+                                                            <inertial pos="0 -0.0025000000000000001 0.018499999999999999" quat="0.70710700000000004 0 0 0.70710700000000004" mass="0.0035000000000000001" diaginertia="4.7395799999999999e-07 3.6458299999999998e-07 1.23958e-07"/>
+                                                            <geom name="robotiq_2f85//unnamed_geom_14" class="robotiq_2f85/visual" mesh="robotiq_2f85/pad"/>
+                                                            <body name="robotiq_2f85/right_silicone_pad">
+                                                            <geom name="robotiq_2f85//unnamed_geom_15" class="robotiq_2f85/visual" material="robotiq_2f85/black" mesh="robotiq_2f85/silicone_pad"/>
+                                                            </body>
+                                                            </body>
+                                                            </body>
+                                                            </body>
+                                                            <body name="robotiq_2f85/left_driver" pos="0 -0.030601099999999999 0.054904000000000001" quat="0 0 0 1">
+                                                            <inertial pos="0 0.017754700000000002 0.00107314" quat="0.68130100000000005 0.73200299999999996 0 0" mass="0.0089956299999999993" diaginertia="1.72352e-06 1.6090599999999999e-06 3.22006e-07"/>
+                                                            <joint name="robotiq_2f85/left_driver_joint" class="robotiq_2f85/driver"/>
+                                                            <geom name="robotiq_2f85//unnamed_geom_16" class="robotiq_2f85/visual" material="robotiq_2f85/gray" mesh="robotiq_2f85/driver"/>
+                                                            <geom name="robotiq_2f85//unnamed_geom_17" class="robotiq_2f85/collision" mesh="robotiq_2f85/driver"/>
+                                                            <body name="robotiq_2f85/left_coupler" pos="0 0.0315 -0.0041000000000000003">
+                                                            <inertial pos="0 0.0030120899999999998 0.023217499999999999" quat="0.70563600000000004 -0.045590400000000003 0.045590400000000003 0.70563600000000004" mass="0.0140974" diaginertia="4.1620600000000001e-06 3.5221600000000001e-06 8.8813100000000003e-07"/>
+                                                            <joint name="robotiq_2f85/left_coupler_joint" class="robotiq_2f85/coupler"/>
+                                                            <geom name="robotiq_2f85//unnamed_geom_18" class="robotiq_2f85/visual" material="robotiq_2f85/black" mesh="robotiq_2f85/coupler"/>
+                                                            <geom name="robotiq_2f85//unnamed_geom_19" class="robotiq_2f85/collision" mesh="robotiq_2f85/coupler"/>
+                                                            </body>
+                                                            </body>
+                                                            <body name="robotiq_2f85/left_spring_link" pos="0 -0.0132 0.060900000000000003" quat="0 0 0 1">
+                                                            <inertial pos="-8.6500500000000008e-09 0.018162399999999999 0.021265800000000001" quat="0.66340299999999996 -0.24473700000000001 0.24473700000000001 0.66340299999999996" mass="0.022164199999999998" diaginertia="8.9685299999999993e-06 6.7173299999999996e-06 2.6393100000000001e-06"/>
+                                                            <joint name="robotiq_2f85/left_spring_link_joint" class="robotiq_2f85/spring_link"/>
+                                                            <geom name="robotiq_2f85//unnamed_geom_20" class="robotiq_2f85/visual" material="robotiq_2f85/black" mesh="robotiq_2f85/spring_link"/>
+                                                            <geom name="robotiq_2f85//unnamed_geom_21" class="robotiq_2f85/collision" mesh="robotiq_2f85/spring_link"/>
+                                                            <body name="robotiq_2f85/left_follower" pos="0 0.055 0.037499999999999999">
+                                                            <inertial pos="0 -0.011046 0.012478599999999999" quat="1 0.16639999999999999 0 0" mass="0.012522200000000001" diaginertia="2.6741500000000001e-06 2.4559000000000001e-06 6.0203100000000003e-07"/>
+                                                            <joint name="robotiq_2f85/left_follower_joint" class="robotiq_2f85/follower"/>
+                                                            <geom name="robotiq_2f85//unnamed_geom_22" class="robotiq_2f85/visual" material="robotiq_2f85/black" mesh="robotiq_2f85/follower"/>
+                                                            <geom name="robotiq_2f85//unnamed_geom_23" class="robotiq_2f85/collision" mesh="robotiq_2f85/follower"/>
+                                                            <body name="robotiq_2f85/left_pad" pos="0 -0.0189 0.013520000000000001">
+                                                            <geom name="robotiq_2f85/left_pad1" class="robotiq_2f85/pad_box1"/>
+                                                            <geom name="robotiq_2f85/left_pad2" class="robotiq_2f85/pad_box2"/>
+                                                            <inertial pos="0 -0.0025000000000000001 0.018499999999999999" quat="1 0 0 1" mass="0.0035000000000000001" diaginertia="4.7395799999999999e-07 3.6458299999999998e-07 1.23958e-07"/>
+                                                            <geom name="robotiq_2f85//unnamed_geom_26" class="robotiq_2f85/visual" mesh="robotiq_2f85/pad"/>
+                                                            <body name="robotiq_2f85/left_silicone_pad">
+                                                            <geom name="robotiq_2f85//unnamed_geom_27" class="robotiq_2f85/visual" material="robotiq_2f85/black" mesh="robotiq_2f85/silicone_pad"/>
+                                                            </body>
+                                                            </body>
+                                                            </body>
+                                                            </body>
+                                                            </body>
+                                                            </body>
+                                                            </body>
+                                                            </body>
+                                                            </body>
+                                                            </body>
+                                                            </body>
+                                                            </body>
+                                                          </body>
+                                                        </body>
+                                                      </body>
+                                                    </body>
+                                                  </body>
+                                                </body>
+                                              </body>
+                                            </body>
+                                          </body>
+                                        </body>
+                                      </body>
+                                    </body>
+                                  </body>
+                                </body>
+                              </body>
+                            </body>
+                          </body>
+                        </body>
+                      </body>
+                    </body>
+                  </body>
+                </body>
+              </body>
+            </body>
+          </body>
+        </body>
+      </body>
+    </body>
+  </worldbody>
+  <contact>
+    <exclude name="robotiq_2f85//unnamed_contact_0" body1="robotiq_2f85/base" body2="robotiq_2f85/left_driver"/>
+    <exclude name="robotiq_2f85//unnamed_contact_1" body1="robotiq_2f85/base" body2="robotiq_2f85/right_driver"/>
+    <exclude name="robotiq_2f85//unnamed_contact_2" body1="robotiq_2f85/base" body2="robotiq_2f85/left_spring_link"/>
+    <exclude name="robotiq_2f85//unnamed_contact_3" body1="robotiq_2f85/base" body2="robotiq_2f85/right_spring_link"/>
+    <exclude name="robotiq_2f85//unnamed_contact_4" body1="robotiq_2f85/right_coupler" body2="robotiq_2f85/right_follower"/>
+    <exclude name="robotiq_2f85//unnamed_contact_5" body1="robotiq_2f85/left_coupler" body2="robotiq_2f85/left_follower"/>
+  </contact>
+  <equality>
+    <connect name="robotiq_2f85//unnamed_equality_0" class="robotiq_2f85/" solref="0.0050000000000000001 1" solimp="0.94999999999999996 0.98999999999999999 0.001" body1="robotiq_2f85/right_follower" body2="robotiq_2f85/right_coupler" anchor="0 0 0"/>
+    <connect name="robotiq_2f85//unnamed_equality_1" class="robotiq_2f85/" solref="0.0050000000000000001 1" solimp="0.94999999999999996 0.98999999999999999 0.001" body1="robotiq_2f85/left_follower" body2="robotiq_2f85/left_coupler" anchor="0 0 0"/>
+    <joint name="robotiq_2f85//unnamed_equality_2" class="robotiq_2f85/" solref="0.0050000000000000001 1" solimp="0.94999999999999996 0.98999999999999999 0.001" joint1="robotiq_2f85/right_driver_joint" joint2="robotiq_2f85/left_driver_joint" polycoef="0 1 0 0 0"/>
+  </equality>
+  <tendon>
+    <fixed name="x0" class="/">
+      <joint joint="0_Jx_1" coef="1"/>
+      <joint joint="0_Jx_2" coef="1"/>
+      <joint joint="0_Jx_3" coef="1"/>
+      <joint joint="0_Jx_4" coef="1"/>
+      <joint joint="0_Jx_5" coef="1"/>
+      <joint joint="0_Jx_6" coef="1"/>
+      <joint joint="0_Jx_7" coef="1"/>
+      <joint joint="0_Jx_8" coef="1"/>
+      <joint joint="0_Jx_9" coef="1"/>
+    </fixed>
+    <fixed name="y0" class="/">
+      <joint joint="0_Jy_1" coef="1"/>
+      <joint joint="0_Jy_2" coef="1"/>
+      <joint joint="0_Jy_3" coef="1"/>
+      <joint joint="0_Jy_4" coef="1"/>
+      <joint joint="0_Jy_5" coef="1"/>
+      <joint joint="0_Jy_6" coef="1"/>
+      <joint joint="0_Jy_7" coef="1"/>
+      <joint joint="0_Jy_8" coef="1"/>
+      <joint joint="0_Jy_9" coef="1"/>
+    </fixed>
+    <fixed name="x1" class="/">
+      <joint joint="1_Jx_1" coef="1"/>
+      <joint joint="1_Jx_2" coef="1"/>
+      <joint joint="1_Jx_3" coef="1"/>
+      <joint joint="1_Jx_4" coef="1"/>
+      <joint joint="1_Jx_5" coef="1"/>
+      <joint joint="1_Jx_6" coef="1"/>
+      <joint joint="1_Jx_7" coef="1"/>
+      <joint joint="1_Jx_8" coef="1"/>
+      <joint joint="1_Jx_9" coef="1"/>
+    </fixed>
+    <fixed name="y1" class="/">
+      <joint joint="1_Jy_1" coef="1"/>
+      <joint joint="1_Jy_2" coef="1"/>
+      <joint joint="1_Jy_3" coef="1"/>
+      <joint joint="1_Jy_4" coef="1"/>
+      <joint joint="1_Jy_5" coef="1"/>
+      <joint joint="1_Jy_6" coef="1"/>
+      <joint joint="1_Jy_7" coef="1"/>
+      <joint joint="1_Jy_8" coef="1"/>
+      <joint joint="1_Jy_9" coef="1"/>
+    </fixed>
+    <fixed name="x2" class="/">
+      <joint joint="2_Jx_1" coef="1"/>
+      <joint joint="2_Jx_2" coef="1"/>
+      <joint joint="2_Jx_3" coef="1"/>
+      <joint joint="2_Jx_4" coef="1"/>
+      <joint joint="2_Jx_5" coef="1"/>
+      <joint joint="2_Jx_6" coef="1"/>
+      <joint joint="2_Jx_7" coef="1"/>
+      <joint joint="2_Jx_8" coef="1"/>
+      <joint joint="2_Jx_9" coef="1"/>
+    </fixed>
+    <fixed name="y2" class="/">
+      <joint joint="2_Jy_1" coef="1"/>
+      <joint joint="2_Jy_2" coef="1"/>
+      <joint joint="2_Jy_3" coef="1"/>
+      <joint joint="2_Jy_4" coef="1"/>
+      <joint joint="2_Jy_5" coef="1"/>
+      <joint joint="2_Jy_6" coef="1"/>
+      <joint joint="2_Jy_7" coef="1"/>
+      <joint joint="2_Jy_8" coef="1"/>
+      <joint joint="2_Jy_9" coef="1"/>
+    </fixed>
+    <fixed name="robotiq_2f85/split" class="robotiq_2f85/">
+      <joint joint="robotiq_2f85/right_driver_joint" coef="0.5"/>
+      <joint joint="robotiq_2f85/left_driver_joint" coef="0.5"/>
+    </fixed>
+  </tendon>
+  <actuator>
+    <cylinder name="p0_j0" class="/" ctrllimited="true" ctrlrange="0 275800" gear="0.10000000000000001" tendon="x0" timeconst="0.20000000000000001" diameter="0.070710678118654766"/>
+    <cylinder name="p1_j0" class="/" ctrllimited="true" ctrlrange="0 275800" gear="-0.10000000000000001" tendon="x0" timeconst="0.20000000000000001" diameter="0.070710678118654766"/>
+    <cylinder name="p2_j0" class="/" ctrllimited="true" ctrlrange="0 275800" gear="0.10000000000000001" tendon="y0" timeconst="0.20000000000000001" diameter="0.070710678118654766"/>
+    <cylinder name="p3_j0" class="/" ctrllimited="true" ctrlrange="0 275800" gear="-0.10000000000000001" tendon="y0" timeconst="0.20000000000000001" diameter="0.070710678118654766"/>
+    <cylinder name="p0_j1" class="/" ctrllimited="true" ctrlrange="0 275800" gear="0.050000000000000003" tendon="x1" timeconst="0.5" diameter="0.050000000000000003"/>
+    <cylinder name="p1_j1" class="/" ctrllimited="true" ctrlrange="0 275800" gear="-0.050000000000000003" tendon="x1" timeconst="0.5" diameter="0.050000000000000003"/>
+    <cylinder name="p2_j1" class="/" ctrllimited="true" ctrlrange="0 275800" gear="0.050000000000000003" tendon="y1" timeconst="0.5" diameter="0.050000000000000003"/>
+    <cylinder name="p3_j1" class="/" ctrllimited="true" ctrlrange="0 275800" gear="-0.050000000000000003" tendon="y1" timeconst="0.5" diameter="0.050000000000000003"/>
+    <cylinder name="p0_j2" class="/" ctrllimited="true" ctrlrange="0 275800" gear="0.050000000000000003" tendon="x2" timeconst="0.80000000000000004" diameter="0.050000000000000003"/>
+    <cylinder name="p1_j2" class="/" ctrllimited="true" ctrlrange="0 275800" gear="-0.050000000000000003" tendon="x2" timeconst="0.80000000000000004" diameter="0.050000000000000003"/>
+    <cylinder name="p2_j2" class="/" ctrllimited="true" ctrlrange="0 275800" gear="0.050000000000000003" tendon="y2" timeconst="0.80000000000000004" diameter="0.050000000000000003"/>
+    <cylinder name="p3_j2" class="/" ctrllimited="true" ctrlrange="0 275800" gear="-0.050000000000000003" tendon="y2" timeconst="0.80000000000000004" diameter="0.050000000000000003"/>
+    <general name="robotiq_2f85/fingers_actuator" class="robotiq_2f85/2f85" ctrlrange="0 255" forcerange="-5 5" tendon="robotiq_2f85/split" gainprm="0.31372549999999999 0 0" biasprm="0 -100 -10"/>
+  </actuator>
+  <sensor>
+    <tendonpos name="u0" tendon="x0"/>
+    <tendonpos name="v0" tendon="y0"/>
+    <tendonpos name="u1" tendon="x1"/>
+    <tendonpos name="v1" tendon="y1"/>
+    <tendonpos name="u2" tendon="x2"/>
+    <tendonpos name="v2" tendon="y2"/>
+    <tendonvel name="ud0" tendon="x0"/>
+    <tendonvel name="vd0" tendon="y0"/>
+    <tendonvel name="ud1" tendon="x1"/>
+    <tendonvel name="vd1" tendon="y1"/>
+    <tendonvel name="ud2" tendon="x2"/>
+    <tendonvel name="vd2" tendon="y2"/>
+  </sensor>
+</mujoco>

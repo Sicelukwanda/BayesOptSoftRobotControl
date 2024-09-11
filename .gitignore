@@ -1,0 +1,24 @@
+*.sif
+.venv
+venv
+dist/
+
+# VSCode
+.vscode/
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# MUJOCO
+MUJOCO_LOG.TXT
+
+# Weights and Biases
+wandb/
+
+# experiment data
+data/
+
+# plotting
+plots/
