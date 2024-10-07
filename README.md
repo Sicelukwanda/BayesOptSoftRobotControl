@@ -38,7 +38,7 @@ pip install -e .
 If you find this useful, please cite the paper!
 ```bash
 @inproceedings{Zwane2024,
- author = {Sicelukwanda N. T. Zwane and Daniel G. Cheney and Curtis C Johnson and Yicheng Luo and Yasemin Bekiroglu and Marc Killpack and Marc P. Deisenroth},
+ author = {Sicelukwanda Zwane and Daniel G. Cheney and Curtis C Johnson and Yicheng Luo and Yasemin Bekiroglu and Marc Killpack and Marc P. Deisenroth},
  booktitle = {Proceedings of the International Conference on Intelligent Robots and Systems (IROS)},
  date = {2024-10-14},
  title = {Learning Dynamic Tasks on a Large-scale Soft Robot in a Handful of Trials},
