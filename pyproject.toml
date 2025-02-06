@@ -15,6 +15,7 @@ requires-python = ">=3.8"
 dependencies = [
   "mujoco>=2.3.5,<3.0.0",
   "dm-control",
+  "mujoco-python-viewer",
   "numpy",
   "absl-py",
   "dm-env",
