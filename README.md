@@ -23,9 +23,13 @@ Soft robots offer more flexibility, compliance, and adaptability than traditiona
 ## Installation
 *Instructions tested on ubuntu 20.04 and Python3.8*
 
-Clone the repo and run pip install. 
+1. Clone the repo and run pip install from within a virtualenv. 
 ```bash
 pip install -e .
+```
+2. Test simulation by running the dm_control viewer (may require spacebar to start)
+```
+python simulate_env.py
 ```
 
 ## ToDo's
