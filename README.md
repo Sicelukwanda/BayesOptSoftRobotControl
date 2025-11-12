@@ -21,7 +21,7 @@ Soft robots offer more flexibility, compliance, and adaptability than traditiona
 </div>
 
 ## Installation
-*Instructions tested on ubuntu 20.04 and Python3.8*
+*Instructions tested on ubuntu 25.04 and Python3.11*
 
 1. Clone the repo and run pip install from within a virtualenv. 
 ```bash
@@ -37,7 +37,7 @@ pip install -e .
     It may require pressing the spacebar to start.
 
    - **Via `simulate.py` (plain MuJoCo):** This is a plain MuJoCo sandbox which uses `mujoco_viewer` with MJCF files. With this method, you have to explicitly manage your robot model (`MjModel`) and data (`MjData`), and manually step the simulation forward. This provides a more low-level, granular control over the simulation.
-   
+
      ```bash
      python src/bellows_arm_control/mujoco/simulate.py
      ```
