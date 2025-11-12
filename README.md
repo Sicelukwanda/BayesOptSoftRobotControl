@@ -23,9 +23,11 @@ Soft robots offer more flexibility, compliance, and adaptability than traditiona
 ## Installation
 *Instructions tested on ubuntu 25.04 and Python3.11*
 
-1. Clone the repo and run pip install from within a virtualenv. 
+1. Clone the repo. This project uses `uv` for dependency management, which is an extremely fast Python package installer and resolver. You can find installation instructions for `uv` [here](https://docs.astral.sh/uv/getting-started/installation/).
+
+2. Install the dependencies using `uv`.
 ```bash
-pip install -e .
+uv sync --all-extras
 ```
 2. Test simulation. There are two completely independent ways to simulate the arm:
 
