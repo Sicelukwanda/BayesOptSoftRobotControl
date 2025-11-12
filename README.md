@@ -27,10 +27,20 @@ Soft robots offer more flexibility, compliance, and adaptability than traditiona
 ```bash
 pip install -e .
 ```
-2. Test simulation by running the dm_control viewer (may require spacebar to start)
-```
-python simulate_env.py
-```
+2. Test simulation. There are two completely independent ways to simulate the arm:
+
+   - **Via `simulate_env.py` (composer):** This is the relevant part for this project. It builds the arm dynamically depending on the environment using `dm_control`'s composer. The composer environments handle stepping the dynamics for you, providing a higher-level interface for agent interaction. 
+
+     ```bash
+     python simulate_env.py
+     ```
+    It may require pressing the spacebar to start.
+
+   - **Via `simulate.py` (plain MuJoCo):** This is a plain MuJoCo sandbox which uses `mujoco_viewer` with MJCF files. With this method, you have to explicitly manage your robot model (`MjModel`) and data (`MjData`), and manually step the simulation forward. This provides a more low-level, granular control over the simulation.
+   
+     ```bash
+     python src/bellows_arm_control/mujoco/simulate.py
+     ```
 
 ## ToDo's
 
