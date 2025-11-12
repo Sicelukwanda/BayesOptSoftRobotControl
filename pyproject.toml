@@ -11,7 +11,7 @@ authors = [
   { name = "Curtis Johnson", email = "curtiscarljohnson@gmail.com"},
   { name = "Yicheng Luo", email = "ethanluoyc@gmail.com" },
 ]
-requires-python = ">=3.8"
+requires-python = ">=3.8, <=3.11"
 dependencies = [
   "mujoco>=2.3.5,<3.0.0",
   "dm-control",
@@ -21,15 +21,6 @@ dependencies = [
   "dm-env",
 ]
 version = "0.1.0"
-classifiers = [
-  "Development Status :: 4 - Beta",
-  "Programming Language :: Python",
-  "Programming Language :: Python :: 3.8",
-  "Programming Language :: Python :: 3.9",
-  "Programming Language :: Python :: 3.10",
-  "Programming Language :: Python :: 3",
-  "Programming Language :: Python :: Implementation :: CPython",
-]
 
 [tool.ruff]
 line-length = 120
