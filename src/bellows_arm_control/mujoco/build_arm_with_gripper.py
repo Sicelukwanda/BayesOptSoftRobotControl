@@ -438,29 +438,29 @@ if __name__ == "__main__":
     xml = arm_mjcf.to_xml_string()
 
     # bandaid for weird bug
-    # xml = xml.replace("link0-3a58470d5f47619f3061a26dc14b3b43155780fe.stl", "link0.stl")
-    # xml = xml.replace("link1-136477aad1ed3510896f193f57b72a429b1e3222.stl", "link1.stl")
-    # xml = xml.replace(
-    #     "base_mount-22e57178defe77afb6bdd333bfae16607f1eb3dd.stl", "base_mount.stl"
-    # )
-    # xml = xml.replace(
-    #     "driver-97efa43184c575b31ff1f3980641896f51492762.stl", "driver.stl"
-    # )
-    # xml = xml.replace("base-e5dacbcc3971bfdb549ff8c7d38ea873ca7f2933.stl", "base.stl")
-    # xml = xml.replace(
-    #     "coupler-0a4240dc94992944cca6ec9e270ff1658fa86c55.stl", "coupler.stl"
-    # )
-    # xml = xml.replace(
-    #     "follower-39e4b8048f1395ee38cb45b37b5fec0e6f2aaec9.stl", "follower.stl"
-    # )
-    # xml = xml.replace("pad-e6a633b2c81740b1f783ec4c6e695c8cc570f09d.stl", "pad.stl")
-    # xml = xml.replace(
-    #     "silicone_pad-c284384f3ca6dcdc24d6188a5d1a2d4c42c412ac.stl", "silicone_pad.stl"
-    # )
-    # xml = xml.replace(
-    #     "spring_link-8f50234325193b84e9f86b7a63a24560a389c9bf.stl", "spring_link.stl"
-    # )
+    xml = xml.replace("link0-3a58470d5f47619f3061a26dc14b3b43155780fe.stl", "link0.stl")
+    xml = xml.replace("link1-136477aad1ed3510896f193f57b72a429b1e3222.stl", "link1.stl")
+    xml = xml.replace(
+        "base_mount-22e57178defe77afb6bdd333bfae16607f1eb3dd.stl", "base_mount.stl"
+    )
+    xml = xml.replace(
+        "driver-97efa43184c575b31ff1f3980641896f51492762.stl", "driver.stl"
+    )
+    xml = xml.replace("base-e5dacbcc3971bfdb549ff8c7d38ea873ca7f2933.stl", "base.stl")
+    xml = xml.replace(
+        "coupler-0a4240dc94992944cca6ec9e270ff1658fa86c55.stl", "coupler.stl"
+    )
+    xml = xml.replace(
+        "follower-39e4b8048f1395ee38cb45b37b5fec0e6f2aaec9.stl", "follower.stl"
+    )
+    xml = xml.replace("pad-e6a633b2c81740b1f783ec4c6e695c8cc570f09d.stl", "pad.stl")
+    xml = xml.replace(
+        "silicone_pad-c284384f3ca6dcdc24d6188a5d1a2d4c42c412ac.stl", "silicone_pad.stl"
+    )
+    xml = xml.replace(
+        "spring_link-8f50234325193b84e9f86b7a63a24560a389c9bf.stl", "spring_link.stl"
+    )
     # to actually write xml file. There's a weird bug in the stl that you need to fix.
-    # f = open("bellows_arm_hand.mjcf", "w")
-    # f.write(xml)
-    # f.close()
+    f = open("bellows_arm_hand2.mjcf", "w")
+    f.write(xml)
+    f.close()
