@@ -19,8 +19,20 @@ dependencies = [
   "numpy",
   "absl-py",
   "dm-env",
+  "botorch",
+  "cma",
+  "tqdm",
+  "tensorboard",
+  "matplotlib",
+  "wandb",
 ]
 version = "0.1.0"
+
+[project.optional-dependencies]
+dev = [
+  "pytest",
+  "ruff",
+]
 
 [tool.ruff]
 line-length = 120
