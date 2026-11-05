@@ -1,7 +1,6 @@
 """Reproduce the benchmark sweeps from the paper (Tables I & II).
 
-Replaces the cluster-specific LXM3 launchers (tools/lxm3_launch.py and tools/lxm3_launch_go.py)
-with a standalone Python sweep runner that executes locally (sequentially or in parallel) and
+Standalone Python sweep runner that executes locally (sequentially or in parallel) and
 prints Markdown summary tables of Mean +/- Std across random seeds.
 
 Examples:
