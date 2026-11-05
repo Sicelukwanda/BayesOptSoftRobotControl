@@ -5,6 +5,7 @@ import logging
 import os
 from typing import Any, Dict, Optional
 
+import imageio
 import numpy as np
 import torch
 from torch.utils.tensorboard import SummaryWriter
@@ -68,6 +69,42 @@ class ExperimentLogger:
             import wandb
 
             wandb.log({**metrics, "trial": int(step)})
+
+    def log_video(
+        self,
+        step: int,
+        frames: np.ndarray,
+        fps: int = 25,
+        tag: str = "policy/rollout",
+        filename_suffix: Optional[str] = None,
+    ) -> Optional[str]:
+        """Save rollout frames (T, H, W, C) uint8 as an MP4 file and log to TensorBoard and/or W&B."""
+        mp4_path: Optional[str] = None
+        base_video_dir: Optional[str] = None
+        if self.save_dir:
+            base_video_dir = os.path.join(self.save_dir, "videos")
+        elif self.logdir:
+            base_video_dir = os.path.join(self.logdir, self.run_name, "videos")
+
+        if base_video_dir is not None:
+            os.makedirs(base_video_dir, exist_ok=True)
+            suffix = filename_suffix if filename_suffix else f"trial_{step}"
+            mp4_path = os.path.join(base_video_dir, f"{self.run_name}_{suffix}.mp4")
+            imageio.mimsave(mp4_path, frames, fps=fps)
+            logging.info(f"Saved rollout video to {mp4_path}")
+
+        if self.tb_writer is not None:
+            vid_tensor = torch.from_numpy(frames).permute(0, 3, 1, 2).unsqueeze(0)
+            self.tb_writer.add_video(tag, vid_tensor, global_step=int(step), fps=fps)
+            self.tb_writer.flush()
+
+        if self.wandb_run is not None:
+            import wandb
+
+            video_input: Any = mp4_path if mp4_path is not None else frames.transpose(0, 3, 1, 2)
+            wandb.log({tag: wandb.Video(video_input, fps=fps, format="mp4"), "trial": int(step)})
+
+        return mp4_path
 
     def save_results(
         self,

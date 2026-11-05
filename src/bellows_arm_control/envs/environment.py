@@ -587,7 +587,7 @@ class BellowsEnv(composer.Environment):
     def horizon(self):
         return self._horizon
 
-    def step(self, action, debug=False):
+    def step(self, action, debug=False, frame_buffer=None, render_stride=40, render_kwargs=None):
         """Scales actions to the range [0, Pmax] from [0, 1 ] and calls the parent step method
         This assumes that the parent step method does not check for action bounds.
         """
@@ -596,19 +596,26 @@ class BellowsEnv(composer.Environment):
             return self.reset()
         substep_obs = []
         substep_acts = []
+        render_kwargs = render_kwargs or {"height": 480, "width": 640, "camera_id": -1}
         scaled_action = np.array(self.MAX_PRESSURES * action)
         # first order hold control
         if not self.order_hold_ctrl:
             for tau in range(self.outer_num_substeps):
                 time_step = super().step(scaled_action)
 
+                if frame_buffer is not None and (tau + 1) % render_stride == 0:
+                    frame_buffer.append(self.physics.render(**render_kwargs))
+
                 if debug:
                     substep_obs.append(time_step)
                     substep_acts.append(scaled_action)
         else:
             interpolated_actions = np.linspace(self.prev_scaled_action, scaled_action, self.outer_num_substeps)
-            for act in interpolated_actions:
+            for tau, act in enumerate(interpolated_actions):
                 time_step = super().step(act)
+
+                if frame_buffer is not None and (tau + 1) % render_stride == 0:
+                    frame_buffer.append(self.physics.render(**render_kwargs))
 
                 if debug:
                     substep_obs.append(time_step)
@@ -623,6 +630,24 @@ class BellowsEnv(composer.Environment):
             self._reset_next_step = True
 
         return time_step
+
+    def render_rollout(self, actions, fps=25, height=480, width=640, camera_id=-1):
+        """Roll out a sequence of actions and return (frames, total_reward)."""
+        self.reset()
+        render_kwargs = {"height": height, "width": width, "camera_id": camera_id}
+        frames = [self.physics.render(**render_kwargs)]
+        physics_dt = float(self.physics.timestep())
+        render_stride = max(1, int(round(1.0 / (fps * physics_dt))))
+        total_reward = 0.0
+        for action in actions:
+            time_step = self.step(
+                action,
+                frame_buffer=frames,
+                render_stride=render_stride,
+                render_kwargs=render_kwargs,
+            )
+            total_reward += float(np.asarray(time_step.reward).squeeze())
+        return np.stack(frames, axis=0), total_reward
 
     def reset(self):
         self._reset_next_step = False

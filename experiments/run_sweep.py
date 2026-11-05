@@ -68,6 +68,17 @@ flags.DEFINE_bool("use_tensorboard", True, "Log metrics to TensorBoard.")
 flags.DEFINE_bool("use_wandb", False, "Log metrics to Weights & Biases.")
 flags.DEFINE_string("wandb_project", "bellows-sweep", "Weights & Biases project name.")
 flags.DEFINE_string("wandb_entity", None, "Weights & Biases entity.")
+flags.DEFINE_bool(
+    "render_last_trial",
+    False,
+    "Render and save an MP4 video of the best policy performance after the last trial.",
+)
+flags.DEFINE_bool(
+    "render_all_trials",
+    False,
+    "Render and save an MP4 video of the policy performance for every trial step.",
+)
+flags.DEFINE_integer("video_fps", 25, "Frame rate (FPS) for rendered MP4 rollout videos.")
 
 
 def build_sweep_jobs() -> List[Dict[str, Any]]:
@@ -95,6 +106,9 @@ def build_sweep_jobs() -> List[Dict[str, Any]]:
                 "use_wandb": FLAGS.use_wandb,
                 "wandb_project": FLAGS.wandb_project,
                 "wandb_entity": FLAGS.wandb_entity,
+                "render_last_trial": FLAGS.render_last_trial,
+                "render_all_trials": FLAGS.render_all_trials,
+                "video_fps": FLAGS.video_fps,
             }
         )
     return jobs
@@ -126,6 +140,9 @@ def execute_job(job: Dict[str, Any]) -> Dict[str, Any]:
             use_wandb=job["use_wandb"],
             wandb_project=job["wandb_project"],
             wandb_entity=job["wandb_entity"],
+            render_last_trial=job["render_last_trial"],
+            render_all_trials=job["render_all_trials"],
+            video_fps=job["video_fps"],
             show_progress=False,
         )
     elif method in ("CEM", "RS"):
@@ -145,6 +162,9 @@ def execute_job(job: Dict[str, Any]) -> Dict[str, Any]:
             use_wandb=job["use_wandb"],
             wandb_project=job["wandb_project"],
             wandb_entity=job["wandb_entity"],
+            render_last_trial=job["render_last_trial"],
+            render_all_trials=job["render_all_trials"],
+            video_fps=job["video_fps"],
             show_progress=False,
         )
     else:

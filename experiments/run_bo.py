@@ -74,6 +74,17 @@ def _define_flags():
     flags.DEFINE_string("wandb_project", "bellows-bo", "Weights & Biases project name.")
     flags.DEFINE_string("wandb_entity", None, "Weights & Biases entity/username.")
     flags.DEFINE_string("wandb_mode", "online", "Weights & Biases mode (online, offline, disabled).")
+    flags.DEFINE_bool(
+        "render_last_trial",
+        False,
+        "Render and save an MP4 video of the best policy performance after the last trial.",
+    )
+    flags.DEFINE_bool(
+        "render_all_trials",
+        False,
+        "Render and save an MP4 video of the policy performance for every trial.",
+    )
+    flags.DEFINE_integer("video_fps", 25, "Frame rate (FPS) for rendered MP4 rollout videos.")
 
 
 def make_acq_factory(acq_func_name: str, beta: float, seed: int = 0):
@@ -108,6 +119,9 @@ def run_bo_trial(
     wandb_project: str = "bellows-bo",
     wandb_entity: Optional[str] = None,
     wandb_mode: str = "online",
+    render_last_trial: bool = False,
+    render_all_trials: bool = False,
+    video_fps: int = 25,
     show_progress: bool = True,
 ) -> Dict[str, Any]:
     """Execute a single Bayesian Optimization experiment run and return summary metrics."""
@@ -222,6 +236,17 @@ def run_bo_trial(
         if trial_num in (100, 500, num_trials):
             best_at_milestones[trial_num] = best_y
 
+        if render_all_trials or (render_last_trial and trial_num == num_trials):
+            best_actions = policy(BO.best_x.detach().cpu().numpy())
+            frames, _ = env.render_rollout(best_actions, fps=video_fps)
+            exp_logger.log_video(
+                step=trial_num,
+                frames=frames,
+                fps=video_fps,
+                tag="policy/rollout",
+                filename_suffix=f"trial_{trial_num}",
+            )
+
     final_best_y = float(BO.Y[BO.best_idx].item())
     exp_logger.save_results(
         X=BO.X,
@@ -268,6 +293,9 @@ def run_experiment(_):
         wandb_project=FLAGS.wandb_project,
         wandb_entity=FLAGS.wandb_entity,
         wandb_mode=FLAGS.wandb_mode,
+        render_last_trial=FLAGS.render_last_trial,
+        render_all_trials=FLAGS.render_all_trials,
+        video_fps=FLAGS.video_fps,
     )
     logging.info(f"Best candidate x:\n{result['best_x']}\nBest objective y: {result['best_y']:.4f}")
 

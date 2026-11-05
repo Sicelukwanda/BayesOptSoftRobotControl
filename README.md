@@ -94,9 +94,23 @@ uv run python experiments/run_sweep.py --envs=throw --discretizations=5 --num_wo
 uv run python experiments/run_sweep.py --num_workers=4
 ```
 
-### 4. Viewing Logs
+### 4. Rendering Policy Rollout Videos (`--render_last_trial` / `--render_all_trials`)
 
-To inspect learning curves and commanded pressure trajectories in TensorBoard:
+All experiment scripts (`run_bo.py`, `run_go.py`, and `run_sweep.py`) support optional video recording flags:
+- `--render_last_trial`: Renders an `.mp4` video showing the final best policy performance after the last trial (`data/videos/<run_name>_trial_<N>.mp4`) and logs it to TensorBoard (`policy/rollout`) and Weights & Biases (when `--use_wandb` is enabled).
+- `--render_all_trials`: Renders an `.mp4` video and logs to TensorBoard / Weights & Biases after every trial step.
+
+```bash
+# Run BayesOpt-UCB and save/log an MP4 video of the final policy performance
+uv run python experiments/run_bo.py --env=throw --acq_func=UCB --act_discretization=5 --num_trials=50 --render_last_trial
+
+# Render and log MP4 videos for every trial
+uv run python experiments/run_bo.py --env=smash --acq_func=LEI --act_discretization=5 --num_trials=20 --render_all_trials
+```
+
+### 5. Viewing Logs
+
+To inspect learning curves and policy rollout videos in TensorBoard:
 
 ```bash
 uv run tensorboard --logdir runs

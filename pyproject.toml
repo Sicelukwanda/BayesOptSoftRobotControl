@@ -25,6 +25,9 @@ dependencies = [
   "tensorboard",
   "matplotlib",
   "wandb",
+  "imageio",
+  "imageio-ffmpeg",
+  "moviepy<2.0.0",
 ]
 version = "0.1.0"
 
