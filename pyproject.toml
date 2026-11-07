@@ -19,8 +19,23 @@ dependencies = [
   "numpy",
   "absl-py",
   "dm-env",
+  "botorch",
+  "cma",
+  "tqdm",
+  "tensorboard",
+  "matplotlib",
+  "wandb",
+  "imageio",
+  "imageio-ffmpeg",
+  "moviepy<2.0.0",
 ]
 version = "0.1.0"
+
+[project.optional-dependencies]
+dev = [
+  "pytest",
+  "ruff",
+]
 
 [tool.ruff]
 line-length = 120

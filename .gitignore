@@ -17,6 +17,9 @@ MUJOCO_LOG.TXT
 # Weights and Biases
 wandb/
 
+# TensorBoard
+runs/
+
 # experiment data
 data/
 
